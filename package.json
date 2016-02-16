@@ -1,0 +1,31 @@
+{
+  "name": "youtubepi",
+  "version": "0.0.1",
+  "description": "Plays youtube on your raspberry pi",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leonardoalt/youtubepi.git"
+  },
+  "keywords": [
+    "youtube",
+    "rpi"
+  ],
+  "author": "Leonardo Alt",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/leonardoalt/youtubepi.git"
+  },
+  "homepage": "https://github.com/leonardoalt/youtubepi#readme",
+  "dependencies": {
+    "bluebird": "^3.1.1",
+    "mime": "^1.3.4",
+    "numeral": "^1.5.3",
+    "pump": "^1.0.1",
+    "range-parser": "^1.0.0",
+    "socket.io": "^1.4.3"
+  }
+}

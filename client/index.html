@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Torrent Streaming</title>
+
+        <script src="js/jquery.min.js"></script>
+        <script src="./js/bower_components/angular/angular.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/socket.io.js"></script>
+
+        <script src="./js/controllers/app.factory.js"></script>
+        <script src="./js/controllers/app.torrentCtrl.js"></script>
+        <script src="./js/controllers/app.playerCtrl.js"></script>
+        <script src="./js/controllers/controllers.js"></script>
+
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body ng-controller="torrentCtrl as torrent">
+        <form ng-submit="torrent.play(torrent.ylink)">
+        <div class="input-group input-group-lg">
+            <input ng-model="torrent.ylink" type="text" class="form-control" placeholder="Youtube link">
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-default" type="button">Go!</button>
+            </span>
+        </div>
+        </form>
+        <h4>
+            <div class="container-fluid">
+            <div class="alert row" role="alert" 
+                ng-class="{'alert-success' : torrent.server_status.class == 'success',
+                'alert-danger' : torrent.server_status.class == 'error',
+                'alert-info' : torrent.server_status.class == 'information'}"
+            >
+                <div class="col-xs-6">
+                    Status: {{torrent.server_status.status}}
+                </div>
+            </div>
+            </div>
+        </h4>
+        <div ng-show="torrent.ylink != ''" ng-controller="playerCtrl as player">
+            <h3>Currently playing:
+            <a ng-href="{{torrent.ylink}}" target="_blank">{{torrent.ylink}}</a>
+            </h3>
+            <br>
+            <div class="btn-group" role="group" aria-label="...">
+                <button ng-show="!player.is_playing" type="button" class="btn btn-default"
+                    aria-label="Play" ng-click="player.pause()">
+                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                </button>
+                <button ng-show="player.is_playing" type="button" class="btn btn-default" 
+                    aria-label="Pause" ng-click="player.pause()">
+                    <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" 
+                     aria-label="StepBackward" ng-click="player.backward()">
+                     <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" 
+                     aria-label="StepForward" ng-click="player.forward()">
+                     <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" 
+                     aria-label="Stop" ng-click="player.stop()">
+                     <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default"
+                    aria-label="VolumeDown" ng-click="player.volume_down()">
+                    <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default"
+                    aria-label="VolumeUp" ng-click="player.volume_up()">
+                    <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </body>
+</html>
